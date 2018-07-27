@@ -32,3 +32,13 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+#mac: LIBS += -F$$PWD/../../Qt/5.10.1/clang_64/lib/ -framework QtPdfWidgets
+
+#INCLUDEPATH += $$PWD/../../Qt/5.10.1/clang_64/include
+#DEPENDPATH += $$PWD/../../Qt/5.10.1/clang_64/include
+
+#mac: LIBS += -F$$PWD/../../Qt/5.10.1/clang_64/lib/ -framework QtPdf
+
+#INCLUDEPATH += $$PWD/../../Qt/5.10.1/clang_64/include
+#DEPENDPATH += $$PWD/../../Qt/5.10.1/clang_64/include

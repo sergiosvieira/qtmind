@@ -11,12 +11,28 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Reforço Mental</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QColumnView" name="columnView"/>
+     <widget class="QTreeView" name="treeView">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
+      <property name="animated">
+       <bool>true</bool>
+      </property>
+      <property name="expandsOnDoubleClick">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -26,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>746</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConcruso">
@@ -35,7 +51,15 @@
     </property>
     <addaction name="actionAdicionar_Novo"/>
    </widget>
+   <widget class="QMenu" name="menuArquivo">
+    <property name="title">
+     <string>Arquivo</string>
+    </property>
+    <addaction name="actionCarregar"/>
+    <addaction name="actionSalvar"/>
+   </widget>
    <addaction name="menuConcruso"/>
+   <addaction name="menuArquivo"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -46,10 +70,32 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionAdicionar_Novo"/>
+   <addaction name="actionNovo_Topico"/>
+   <addaction name="actionRemover_Item"/>
   </widget>
   <action name="actionAdicionar_Novo">
    <property name="text">
-    <string>Adicionar Novo</string>
+    <string>Novo Concurso</string>
+   </property>
+  </action>
+  <action name="actionNovo_Topico">
+   <property name="text">
+    <string>Novo Topico</string>
+   </property>
+  </action>
+  <action name="actionRemover_Item">
+   <property name="text">
+    <string>Remover Item</string>
+   </property>
+  </action>
+  <action name="actionCarregar">
+   <property name="text">
+    <string>Carregar</string>
+   </property>
+  </action>
+  <action name="actionSalvar">
+   <property name="text">
+    <string>Salvar</string>
    </property>
   </action>
  </widget>
