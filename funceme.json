@@ -1,0 +1,78 @@
+{
+  "name": "root",
+  "items": [
+    {
+      "name": "Funceme 2018",
+      "last_reinforcement_end": "1978-01-01 12:00:00",
+      "next_reinforcement_start": "1978-01-01 12:20:00",
+      "retention": 100,
+      "total_reinforcements": 1,
+      "type": "PROJECT",
+      "page": "",
+      "items": [
+        {
+          "name": "Desenvolvimento",
+          "last_reinforcement_end": "1978-01-01 12:00:00",
+          "next_reinforcement_start": "1978-01-01 12:20:00",
+          "retention": 100,
+          "total_reinforcements": 1,
+          "type": "TOPIC",
+          "page": "",
+          "items": [
+            {
+              "name": "C",
+              "last_reinforcement_end": "1978-01-01 12:00:00",
+              "next_reinforcement_start": "1978-01-01 12:20:00",
+              "retention": 100,
+              "total_reinforcements": 1,
+              "type": "TOPIC",
+              "page": "",
+              "items": [
+                {
+                  "name": "Estruturas de Repetição",
+                  "last_reinforcement_end": "1978-01-01 12:00:00",
+                  "next_reinforcement_start": "1978-01-01 12:20:00",
+                  "retention": 100,
+                  "total_reinforcements": 1,
+                  "type": "TOPIC",
+                  "page": "",
+                  "items": [
+                     {
+                        "name": "https://www.devmedia.com.br/estrutura-de-repeticao-c/24121",
+                        "last_reinforcement_end": "1978-01-01 12:00:00",
+                        "next_reinforcement_start": "1978-01-01 12:20:00",
+                        "retention": 100,
+                        "total_reinforcements": 1,
+                        "type": "LINK",
+                        "page": "",
+                        "items": []
+                      },
+                     {
+                        "name": "/Users/sergiovieira/Downloads/C in a Nutshell, 2nd Edition.pdf",
+                        "last_reinforcement_end": "1978-01-01 12:00:00",
+                        "next_reinforcement_start": "1978-01-01 12:20:00",
+                        "retention": 100,
+                        "total_reinforcements": 1,
+                        "type": "PDF",
+                        "page": "152",
+                        "items": []
+                      }                      
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "C++",
+              "last_reinforcement_end": "1978-01-01 12:00:00",
+              "next_reinforcement_start": "1978-01-01 12:20:00",
+              "retention": 100,
+              "total_reinforcements": 1,
+              "type": "TOPIC",
+              "items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
