@@ -10,6 +10,8 @@
 #include <QJsonArray>
 #include <QDateTime>
 #include <QDesktopServices>
+#include <cmath>
+
 
 const char* MainWindow::kName = "name";
 const char* MainWindow::kItems = "items";
@@ -19,7 +21,8 @@ const char* MainWindow::kRetention = "retention";
 const char* MainWindow::kTotalReinforcement = "total_reinforcements";
 const char* MainWindow::kType = "type";
 const char* MainWindow::kPage = "page";
-
+const char* MainWindow::kDateFormat = "yyyy-MM-dd hh:mm:ss";
+const std::vector<MainWindow::Parameters> kParameters;
 
 void MainWindow::insertRow(QJsonObject& object, const QModelIndex &mIndex)
 {
@@ -224,19 +227,38 @@ void MainWindow::on_actionSalvar_triggered()
 
 QJsonDocument *MainWindow::loadFromModel(const QAbstractItemModel &model)
 {
-    QJsonDocument* result = new QJsonDocument();
-    QJsonObject root;
-    root.insert(kName, "root");
+    QJsonDocument* document = new QJsonDocument();
+    QModelIndex rootIndex = ui->treeView->rootIndex();
+    QJsonObject rootObject = this->forEach(rootIndex, model);
+    document->setObject(rootObject);
+    return document;
+}
+
+QJsonObject MainWindow::forEach(const QModelIndex &parentIndex,
+                                const QAbstractItemModel &model)
+{
+    QJsonObject object;
     QJsonArray array;
-    int rows = ui->treeView->model()->rowCount(ui->treeView->rootIndex());
-    for (int r = 0; r < rows; ++r)
+    auto rows = model.rowCount(parentIndex);
+    auto cols = model.columnCount(parentIndex);
+    QStringList& list = this->getJsonKeys();
+    if (model.hasChildren(parentIndex))
     {
-        QJsonObject object = this->forEach(ui->treeView->model()->index(r, 0), *ui->treeView->model());
-        array.push_back(object);
+        for (int r = 0; r < rows; ++r)
+        {
+            for (int c = 0; c < cols; ++c)
+            {
+                QModelIndex index = model.index(r, c, parentIndex);
+                object.insert(list[c], model.data(index).toString());
+            }
+            QModelIndex childIndex = model.index(r, 0, parentIndex);
+            QJsonObject child = this->forEach(childIndex, model);
+            array.append(child);
+        }
     }
-    root.insert(kItems, array);
-    result->setObject(root);
-    return result;
+    object.insert(kName, model.data(parentIndex).toString());
+    object.insert(kItems, array);
+    return object;
 }
 
 QMap<QString, QString> MainWindow::extractValuesFromModel(const QAbstractItemModel &model, int row, QModelIndex& parent)
@@ -265,35 +287,6 @@ void MainWindow::iterate(const QModelIndex & index, const QAbstractItemModel * m
             iterate(model->index(i, j, index), model, fun, depth+1);
 }
 
-QJsonObject MainWindow::forEach(const QModelIndex &index,
-                                const QAbstractItemModel &model)
-{
-    QJsonObject result;
-    QJsonArray array;
-    auto rows = model.rowCount(index);
-    auto cols = model.columnCount(index);
-
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < cols; ++j)
-        {
-            QModelIndex childIndex = model.index(i, j, index);
-            QString key = this->getJsonKeys()[j];
-            result.insert(key, model.data(childIndex).toString());
-        }
-        if (!model.hasChildren(model.index(i, 0, index)))
-        {
-            return result;
-        }
-        else
-        {
-            QJsonObject object = this->forEach(model.index(i, 0, index), model);
-            array.push_back(object);
-        }
-    }
-    result.insert(kItems, array);
-    return result;
-}
 
 QStringList MainWindow::getColumnNames()
 {
@@ -324,6 +317,27 @@ QStringList& MainWindow::getJsonKeys()
     return list;
 }
 
+MainWindow::Parameters MainWindow::getParameters(int index)
+{
+    static Parameters p[] =
+    {
+        {100.0, 0.0, 19.576151889712175},
+        {90.0, 10.0, 73.98910387129295},
+        {100.0, 10.0, 142.36832371544847},
+        {100.0, 25.0, 487.3931436555927}
+
+    };
+   return p[index];
+}
+
+void MainWindow::setValue(const QModelIndex &index,
+                          int col,
+                          QVariant value)
+{
+    QModelIndex setIndex = model->index(index.row(), col, index.parent());
+    model->setData(setIndex, value);
+}
+
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
     QString type = this->getValue(index, 1);
@@ -346,4 +360,84 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
         QString url = QString("%1#page=%2").arg(filepath).arg(page);
         QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
     }
+    else if (type == "TOPIC")
+    {
+        QString lastDateStr = this->getValue(index, 3);
+        if (lastDateStr.isEmpty())
+        {
+            /* Data da última revisão */
+            QDateTime currentDate = QDateTime::currentDateTime();
+            QString currentDateStr = currentDate.toString(kDateFormat);
+            this->setValue(index, 3, QVariant(currentDateStr));
+            /* Data da próxima revisão */
+            QDateTime nextDate = currentDate.addDays(3);
+            QString nextDateStr = nextDate.toString(kDateFormat);
+            this->setValue(index, 4, QVariant(nextDateStr));
+            /* % de Retenção */
+            this->setValue(index, 5, QVariant(100));
+            /* % Total de Revisões */
+            this->setValue(index, 6, QVariant(1));
+        }
+        else
+        {
+            QDateTime lastDate = QDateTime::fromString(lastDateStr, kDateFormat);
+            QDateTime nextDate = QDateTime::fromString(this->getValue(index, 4), kDateFormat);
+            QDateTime currentDate = QDateTime::currentDateTime();
+            if (currentDate < nextDate)
+            {
+                QMessageBox msg;
+                msg.setText(tr("Ainda não é hora de revisar."));
+                msg.exec();
+            }
+            else
+            {
+                /* Data da última revisão */
+                QString currentDateStr = currentDate.toString(kDateFormat);
+                this->setValue(index, 3, QVariant(currentDateStr));
+                /* Data da próxima revisão */
+                int total = this->getValue(index, 6).toInt();
+                int days = (total == 2) ? (7) : ((total == 3) ? (25) : (25));
+                QDateTime nextDate = currentDate.addDays(days);
+                QString nextDateStr = nextDate.toString(kDateFormat);
+                this->setValue(index, 4, QVariant(nextDateStr));
+                /* % de Retenção */
+                Parameters p = this->getParameters(total % 3);
+                int nDays = currentDate.daysTo(lastDate);
+                double r = this->f(nDays, p);
+                this->setValue(index, 5, QVariant(r));
+                /* % Total de Revisões */
+                this->setValue(index, 6, QVariant(++total));
+            }
+        }
+    }
+}
+
+void MainWindow::on_actionNovo_Link_triggered()
+{
+    static int id = 1;
+    bool ok = false;
+    QString title = tr("Nome Link:");
+    QString text = QInputDialog::getText(
+        this,
+        tr("Reforço Mental"),
+        title,
+        QLineEdit::Normal,
+        QString("Tópico %1").arg(id++),
+        &ok
+    );
+    if (ok && !text.isEmpty())
+    {
+        QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+        QJsonObject object;
+        object[kName] = text;
+        object[kType] = "LINK";
+        this->insertChild(object, index);
+        ui->treeView->selectionModel()->setCurrentIndex(model->index(0, 0, index),
+                                                QItemSelectionModel::ClearAndSelect);
+    }
+}
+
+double MainWindow::f(double x, const Parameters& p)
+{
+    return p.c1 * exp((-x-p.c2)/p.c3);
 }
