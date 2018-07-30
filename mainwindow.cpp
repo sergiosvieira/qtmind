@@ -85,15 +85,7 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
 void MainWindow::createModel()
 {
     model = new QStandardItemModel(0, 7, this);
-    QStringList list = {
-        tr("Nome"),
-        tr("Tipo"),
-        tr("Página"),
-        tr("Data da última revisão"),
-        tr("Data da próxima revisão"),
-        tr("% de Retenção"),
-        tr("Número de Revisões"),
-    };
+    QStringList list = this->getColumnNames();
     model->setHorizontalHeaderLabels(list);
     ui->treeView->setModel(model);
 }
@@ -136,10 +128,11 @@ void MainWindow::on_actionAdicionar_Novo_triggered()
     );
     if (ok && !text.isEmpty())
     {
-        QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+        QModelIndex index = ui->treeView->rootIndex();
+        QModelIndex childIndex = model->index(index.row() + 1, 0, index.parent());
         QJsonObject object;
         object[kName] = text;
-        this->insertRow(object, index);
+        this->insertRow(object, childIndex);
     }
 }
 
@@ -212,17 +205,123 @@ void MainWindow::on_actionCarregar_triggered()
 
 void MainWindow::on_actionSalvar_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
+    QString fileName = QFileDialog::getSaveFileName(this,
             tr("Salvar"), "",
             tr("JSON (*.json);;All Files (*)"));
     if (fileName.isEmpty())
     {
-           return;
+        return;
     }
     else
     {
-
+        QJsonDocument* document = this->loadFromModel(*ui->treeView->model());
+        QFile jsonFile(fileName);
+        jsonFile.open(QFile::WriteOnly);
+        jsonFile.write(document->toJson());
+        jsonFile.close();
     }
+}
+
+QJsonDocument *MainWindow::loadFromModel(const QAbstractItemModel &model)
+{
+    QJsonDocument* result = new QJsonDocument();
+    QJsonObject root;
+    root.insert(kName, "root");
+    QJsonArray array;
+    int rows = ui->treeView->model()->rowCount(ui->treeView->rootIndex());
+    for (int r = 0; r < rows; ++r)
+    {
+        QJsonObject object = this->forEach(ui->treeView->model()->index(r, 0), *ui->treeView->model());
+        array.push_back(object);
+    }
+    root.insert(kItems, array);
+    result->setObject(root);
+    return result;
+}
+
+QMap<QString, QString> MainWindow::extractValuesFromModel(const QAbstractItemModel &model, int row, QModelIndex& parent)
+{
+    QMap<QString, QString> result;
+    QStringList list = this->getJsonKeys();
+    for (int col = 0; col < model.columnCount(parent); ++col)
+    {
+        QModelIndex index = model.index(row, col, parent);
+        result[list[col]] = model.data(index).toString();
+    }
+    return result;
+}
+
+void MainWindow::iterate(const QModelIndex & index, const QAbstractItemModel * model,
+             const std::function<void(const QModelIndex&, int)> & fun,
+             int depth)
+{
+    if (index.isValid())
+        fun(index, depth);
+    if (!model->hasChildren(index)) return;
+    auto rows = model->rowCount(index);
+    auto cols = model->columnCount(index);
+    for (int i = 0; i < rows; ++i)
+        for (int j = 0; j < cols; ++j)
+            iterate(model->index(i, j, index), model, fun, depth+1);
+}
+
+QJsonObject MainWindow::forEach(const QModelIndex &index,
+                                const QAbstractItemModel &model)
+{
+    QJsonObject result;
+    QJsonArray array;
+    auto rows = model.rowCount(index);
+    auto cols = model.columnCount(index);
+
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            QModelIndex childIndex = model.index(i, j, index);
+            QString key = this->getJsonKeys()[j];
+            result.insert(key, model.data(childIndex).toString());
+        }
+        if (!model.hasChildren(model.index(i, 0, index)))
+        {
+            return result;
+        }
+        else
+        {
+            QJsonObject object = this->forEach(model.index(i, 0, index), model);
+            array.push_back(object);
+        }
+    }
+    result.insert(kItems, array);
+    return result;
+}
+
+QStringList MainWindow::getColumnNames()
+{
+    static QStringList list = {
+        tr("Nome"),
+        tr("Tipo"),
+        tr("Página"),
+        tr("Data da última revisão"),
+        tr("Data da próxima revisão"),
+        tr("% de Retenção"),
+        tr("Número de Revisões"),
+    };
+    return list;
+}
+
+QStringList& MainWindow::getJsonKeys()
+{
+    static QStringList list = {
+        kName,
+        kType,
+        kPage,
+        kLastReinforcement,
+        kNextReinforcement,
+        kRetention,
+        kTotalReinforcement,
+        kItems
+    };
+    return list;
 }
 
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
@@ -232,8 +331,13 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
     {
         QString filepath = this->getValue(index, 0);
         QString page = this->getValue(index, 2);
-        QString url = QString("file://%1#page=%2").arg(filepath).arg(page);
-        QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
+        QString url = QString("%1#page=%2").arg(filepath).arg(page);
+        if (!QDesktopServices::openUrl(QUrl(url, QUrl::StrictMode)))
+        {
+            QMessageBox msg;
+            msg.setText(tr("Falha ao tentar abrir o PDF!"));
+                msg.exec();
+        };
     }
     else if (type == "LINK")
     {
