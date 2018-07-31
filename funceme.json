@@ -1,78 +1,973 @@
 {
-  "name": "root",
-  "items": [
-    {
-      "name": "Funceme 2018",
-      "last_reinforcement_end": "1978-01-01 12:00:00",
-      "next_reinforcement_start": "1978-01-01 12:20:00",
-      "retention": 100,
-      "total_reinforcements": 1,
-      "type": "PROJECT",
-      "page": "",
-      "items": [
+    "items": [
         {
-          "name": "Desenvolvimento",
-          "last_reinforcement_end": "1978-01-01 12:00:00",
-          "next_reinforcement_start": "1978-01-01 12:20:00",
-          "retention": 100,
-          "total_reinforcements": 1,
-          "type": "TOPIC",
-          "page": "",
-          "items": [
-            {
-              "name": "C",
-              "last_reinforcement_end": "1978-01-01 12:00:00",
-              "next_reinforcement_start": "1978-01-01 12:20:00",
-              "retention": 100,
-              "total_reinforcements": 1,
-              "type": "TOPIC",
-              "page": "",
-              "items": [
+            "items": [
                 {
-                  "name": "Estruturas de Repetição",
-                  "last_reinforcement_end": "1978-01-01 12:00:00",
-                  "next_reinforcement_start": "1978-01-01 12:20:00",
-                  "retention": 100,
-                  "total_reinforcements": 1,
-                  "type": "TOPIC",
-                  "page": "",
-                  "items": [
-                     {
-                        "name": "https://www.devmedia.com.br/estrutura-de-repeticao-c/24121",
-                        "last_reinforcement_end": "1978-01-01 12:00:00",
-                        "next_reinforcement_start": "1978-01-01 12:20:00",
-                        "retention": 100,
-                        "total_reinforcements": 1,
-                        "type": "LINK",
-                        "page": "",
-                        "items": []
-                      },
-                     {
-                        "name": "/Users/sergiovieira/Downloads/C in a Nutshell, 2nd Edition.pdf",
-                        "last_reinforcement_end": "1978-01-01 12:00:00",
-                        "next_reinforcement_start": "1978-01-01 12:20:00",
-                        "retention": 100,
-                        "total_reinforcements": 1,
-                        "type": "PDF",
-                        "page": "152",
-                        "items": []
-                      }                      
-                  ]
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "https://www.devmedia.com.br/estrutura-de-repeticao-c/24121",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "0",
+                                            "total_reinforcements": "0",
+                                            "type": "LINK"
+                                        },
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "http:///Users/sergiovieira/Downloads/CNutshell.pdf",
+                                            "next_reinforcement_start": "",
+                                            "page": "152",
+                                            "retention": "0",
+                                            "total_reinforcements": "0",
+                                            "type": "PDF"
+                                        }
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Estruturas de Repetição",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "C",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "C++",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "JSON",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Geospatial Data Abstraction Library (GDAL 1.11)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Desenvolvimento",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "wxWidgets 3.1",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Interfaces gráficas de usuário multiplataforma:",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "SCRUM",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "XP",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Metodologias ágeis:",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Test-driven development (TDD)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Biblioteca igloo",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Práticas ágeis:",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Padrões de criação",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Padrões estruturais",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Padrões comportamentais",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Padrões de projeto:",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Conceitos básicos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "estrutura e objetivos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "disciplinas e formas de representação",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "níveis de capacidade e maturidade",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Processos e categorias de processo",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Vantagens e desvantagens",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "CMMI 1.3 (Capability Maturity Model Integration)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Conceitos básicos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Modelos de maturidade de processos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Vantagens e desvantagens",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "MPS.BR (Melhoria de Processos do Software Brasileiro)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Qualidade de software",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://drive.google.com/open?id=1iVl4PAGf3AxlnOBtR95XmLosfUoVlzlF",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://slideplayer.com.br/slide/353683/",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Calibração de modelos hidrológicos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "",
+                            "total_reinforcements": "",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "O problema de alocação de água para múltiplos usos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Uso de otimização no setor de recursos hídricos",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Sistemas Gerenciadores de Banco de Dados (SGBD)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Linguagens de definição e manipulação de dados",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Linguagem SQL",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Banco de Dados",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "http://www.nacad.ufrj.br/~falcao/ag/AG4.pdf",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://drive.google.com/file/d/1-keqVtuQZ1R1_BkfMKUm5LgJ5eaKsCrN/view#page=2",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Frente de Pareto",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "",
+                            "total_reinforcements": "",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "http://www.comp.ita.br/~carlos/texts/8-AlgoritmosGeneticos.pdf",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://www.youtube.com/watch?v=0rSQB2i4t2Y",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://www.dca.ufrn.br/~estefane/metaheuristicas/ag_binario.pdf",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Algoritmos Genéticos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://www.youtube.com/watch?v=33hBveE7HlI&t=927s",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Otimização baseada em enxame de partículas",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "",
+                            "total_reinforcements": "",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "https://www.youtube.com/watch?v=w1wTSqtBRz8",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "http://jmetal.sourceforge.net/resources/jMetalUserManual43.pdf#page=11",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "LINK"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Biblioteca jMetal (Biblioteca de metaheurísticas)",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Otimização Multiobjetivo",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Conceitos básicos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Técnicas de levantamentos de requisitos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Gerenciamento de requisitos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Especificação de requisitos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Técnicas de validação de requisitos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Prototipação",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Engenharia de requisitos",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "http://www.silabo.pt/Conteudos/9329_PDF.pdf#page=9",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "",
+                                            "total_reinforcements": "",
+                                            "type": "LINK"
+                                        }
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "conceitos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "https://kam.mff.cuni.cz/~elias/glpk.pdf",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "",
+                                            "total_reinforcements": "",
+                                            "type": "LINK"
+                                        },
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "http://homepages.dcc.ufmg.br/~vwcmorais/docs/apresentacao_solver1.pdf",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "",
+                                            "total_reinforcements": "",
+                                            "type": "LINK"
+                                        }
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "ferramenta GLPK 4.60",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Programação Linear",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Algoritmos Genéticos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "Enxame de partículas",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Computação Evolutiva",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Otimização",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Conceitos básicos de análise orientada a objetos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "UML 2.0",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Análise e Projeto Orientados a Objeto",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
+                },
+                {
+                    "items": [
+                        {
+                            "items": [
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "classes",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "objetos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "métodos",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "mensagens",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "sobrecarga",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "herança",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "0",
+                                    "total_reinforcements": "0",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "https://tasafo.wordpress.com/2015/04/23/programacao-orientada-a-objetos-heranca-e-polimorfismo-parte-1/",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "",
+                                            "total_reinforcements": "",
+                                            "type": "LINK"
+                                        }
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "polimorfismo",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "TOPIC"
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "items": [
+                                            ],
+                                            "last_reinforcement_end": "",
+                                            "name": "https://www.devmedia.com.br/interfaces-programacao-orientada-a-objetos/18695",
+                                            "next_reinforcement_start": "",
+                                            "page": "",
+                                            "retention": "0",
+                                            "total_reinforcements": "0",
+                                            "type": "LINK"
+                                        }
+                                    ],
+                                    "last_reinforcement_end": "",
+                                    "name": "interfaces",
+                                    "next_reinforcement_start": "",
+                                    "page": "",
+                                    "retention": "",
+                                    "total_reinforcements": "",
+                                    "type": "TOPIC"
+                                }
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Conceitos básicos",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        },
+                        {
+                            "items": [
+                            ],
+                            "last_reinforcement_end": "",
+                            "name": "Tratamento de exceção",
+                            "next_reinforcement_start": "",
+                            "page": "",
+                            "retention": "0",
+                            "total_reinforcements": "0",
+                            "type": "TOPIC"
+                        }
+                    ],
+                    "last_reinforcement_end": "",
+                    "name": "Programação Orientada a objetos",
+                    "next_reinforcement_start": "",
+                    "page": "",
+                    "retention": "0",
+                    "total_reinforcements": "0",
+                    "type": "MAIN_TOPIC"
                 }
-              ]
-            },
-            {
-              "name": "C++",
-              "last_reinforcement_end": "1978-01-01 12:00:00",
-              "next_reinforcement_start": "1978-01-01 12:20:00",
-              "retention": 100,
-              "total_reinforcements": 1,
-              "type": "TOPIC",
-              "items": []
-            }
-          ]
+            ],
+            "last_reinforcement_end": "",
+            "name": "Funceme 2018",
+            "next_reinforcement_start": "",
+            "page": "",
+            "retention": "0",
+            "total_reinforcements": "0",
+            "type": "PROJECT"
         }
-      ]
-    }
-  ]
+    ],
+    "name": null
 }

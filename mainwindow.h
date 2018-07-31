@@ -42,7 +42,8 @@ private:
     QString getValue(const QModelIndex &index, int col);
      QMap<QString, QString> extractValuesFromModel(const QAbstractItemModel &model, int row, QModelIndex& parent);
     QJsonDocument *loadFromModel(const QAbstractItemModel &model);
-    QJsonObject forEach(const QModelIndex &parentIndex, const QAbstractItemModel &model);
+    QJsonObject forEach(const QModelIndex &parentIndex,
+                         const QAbstractItemModel &model);
     QStringList getColumnNames();
     QStringList &getJsonKeys();
     Parameters getParameters(int index);
@@ -67,6 +68,8 @@ private slots:
      * f(x) = c1 . e^(-x - c2/ c3)
      */
     double f(double x, const Parameters& p);
+    void on_actionZerar_T_pico_triggered();
+
 private:
     Ui::MainWindow *ui;
     QStandardItemModel* model = nullptr;

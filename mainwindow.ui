@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>746</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConcruso">
@@ -73,6 +73,7 @@
    <addaction name="actionNovo_Topico"/>
    <addaction name="actionNovo_Link"/>
    <addaction name="actionRemover_Item"/>
+   <addaction name="actionZerar_T_pico"/>
   </widget>
   <action name="actionAdicionar_Novo">
    <property name="text">
@@ -102,6 +103,11 @@
   <action name="actionNovo_Link">
    <property name="text">
     <string>Novo Link</string>
+   </property>
+  </action>
+  <action name="actionZerar_T_pico">
+   <property name="text">
+    <string>Zerar Tópico</string>
    </property>
   </action>
  </widget>

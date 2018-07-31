@@ -49,11 +49,12 @@ void MainWindow::insertChild(QJsonObject& object, const QModelIndex &index)
     }
     if (!model->insertRow(0, index)) return;
     QStringList values;
+    QStringList& keys = this->getJsonKeys();
     QJsonArray array = this->extractValues(object, values);
     for (int column = 0; column < values.size(); ++column)
     {
         QModelIndex child = model->index(0, column, index);
-        model->setData(child, QVariant(values[column]), Qt::EditRole);
+        model->setData(child, QVariant(object[keys[column]]), Qt::EditRole);
         for (int index = 0; index < array.size(); ++index)
         {
             QJsonObject childObject = array[index].toObject();
@@ -87,6 +88,7 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
 
 void MainWindow::createModel()
 {
+    if (model != nullptr) delete model;
     model = new QStandardItemModel(0, 7, this);
     QStringList list = this->getColumnNames();
     model->setHorizontalHeaderLabels(list);
@@ -134,7 +136,13 @@ void MainWindow::on_actionAdicionar_Novo_triggered()
         QModelIndex index = ui->treeView->rootIndex();
         QModelIndex childIndex = model->index(index.row() + 1, 0, index.parent());
         QJsonObject object;
+        QStringList &list = this->getJsonKeys();
+        foreach (QString key, list)
+        {
+            object[key] = "";
+        }
         object[kName] = text;
+        object[kType] = "PROJECT";
         this->insertRow(object, childIndex);
     }
 }
@@ -156,10 +164,16 @@ void MainWindow::on_actionNovo_Topico_triggered()
     {
         QModelIndex index = ui->treeView->selectionModel()->currentIndex();
         QJsonObject object;
+        QStringList &list = this->getJsonKeys();
+        foreach (QString key, list)
+        {
+            object[key] = "";
+        }
         object[kName] = text;
+        object[kType] = "TOPIC";
         this->insertChild(object, index);
-        ui->treeView->selectionModel()->setCurrentIndex(model->index(0, 0, index),
-                                                QItemSelectionModel::ClearAndSelect);
+//        ui->treeView->selectionModel()->setCurrentIndex(model->index(0, 0, index),
+//                                                QItemSelectionModel::ClearAndSelect);
     }
 
 }
@@ -229,7 +243,12 @@ QJsonDocument *MainWindow::loadFromModel(const QAbstractItemModel &model)
 {
     QJsonDocument* document = new QJsonDocument();
     QModelIndex rootIndex = ui->treeView->rootIndex();
-    QJsonObject rootObject = this->forEach(rootIndex, model);
+    QJsonObject object = this->forEach(rootIndex, model);
+    QJsonObject rootObject;
+    QJsonArray rootArray;
+    rootArray.append(object);
+    rootObject.insert(kName, object[kName]);
+    rootObject.insert(kItems, object[kItems]);
     document->setObject(rootObject);
     return document;
 }
@@ -238,25 +257,24 @@ QJsonObject MainWindow::forEach(const QModelIndex &parentIndex,
                                 const QAbstractItemModel &model)
 {
     QJsonObject object;
-    QJsonArray array;
-    auto rows = model.rowCount(parentIndex);
+    QJsonArray array;    
     auto cols = model.columnCount(parentIndex);
     QStringList& list = this->getJsonKeys();
+    auto rows = model.rowCount(parentIndex);
     if (model.hasChildren(parentIndex))
     {
         for (int r = 0; r < rows; ++r)
         {
+            QModelIndex childIndex = model.index(r, 0, parentIndex);
+            QJsonObject child = this->forEach(childIndex, model);
             for (int c = 0; c < cols; ++c)
             {
                 QModelIndex index = model.index(r, c, parentIndex);
-                object.insert(list[c], model.data(index).toString());
+                child.insert(list[c], index.data().toString());
             }
-            QModelIndex childIndex = model.index(r, 0, parentIndex);
-            QJsonObject child = this->forEach(childIndex, model);
-            array.append(child);
+            array.push_back(child);
         }
     }
-    object.insert(kName, model.data(parentIndex).toString());
     object.insert(kItems, array);
     return object;
 }
@@ -440,4 +458,14 @@ void MainWindow::on_actionNovo_Link_triggered()
 double MainWindow::f(double x, const Parameters& p)
 {
     return p.c1 * exp((-x-p.c2)/p.c3);
+}
+
+void MainWindow::on_actionZerar_T_pico_triggered()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QStringList& keys = this->getJsonKeys();
+    for (int c = 2; c < keys.size(); ++c)
+    {
+        this->setValue(index, c, QVariant(QString("")));
+    }
 }
