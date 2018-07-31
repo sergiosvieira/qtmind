@@ -35,6 +35,8 @@ private:
     static const char* kType;
     static const char* kPage;
     static const char* kDateFormat;
+    QString currentFile = "";
+    bool fileUpdated = false;
     void insertRow(QJsonObject& object, const QModelIndex& modelIndex);
     void insertChild(QJsonObject &object, const QModelIndex& modelIndex);
     QJsonArray extractValues(QJsonObject& object, QStringList& list);
@@ -69,6 +71,8 @@ private slots:
      */
     double f(double x, const Parameters& p);
     void on_actionZerar_T_pico_triggered();
+
+    void on_actionAtualizar_de_Reten_o_triggered();
 
 private:
     Ui::MainWindow *ui;

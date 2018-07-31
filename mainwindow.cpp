@@ -186,7 +186,7 @@ void MainWindow::on_actionRemover_Item_triggered()
 }
 
 void MainWindow::on_actionCarregar_triggered()
-{
+{    
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Carregar Arquivo"), "",
             tr("JSON (*.json);;All Files (*)"));
@@ -196,6 +196,7 @@ void MainWindow::on_actionCarregar_triggered()
     }
     else
     {
+        this->currentFile = fileName;
         QFile file(fileName);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
@@ -222,15 +223,21 @@ void MainWindow::on_actionCarregar_triggered()
 
 void MainWindow::on_actionSalvar_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this,
-            tr("Salvar"), "",
-            tr("JSON (*.json);;All Files (*)"));
+    QString fileName = this->currentFile;
+    if (this->currentFile.isEmpty())
+    {
+        fileName = QFileDialog::getSaveFileName(this,
+                                                tr("Salvar"),
+                                                "",
+                                                tr("JSON (*.json);;All Files (*)"));
+    }
     if (fileName.isEmpty())
     {
         return;
     }
     else
     {
+        this->currentFile = fileName;
         QJsonDocument* document = this->loadFromModel(*ui->treeView->model());
         QFile jsonFile(fileName);
         jsonFile.open(QFile::WriteOnly);
@@ -419,7 +426,7 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
                 QString nextDateStr = nextDate.toString(kDateFormat);
                 this->setValue(index, 4, QVariant(nextDateStr));
                 /* % de Retenção */
-                Parameters p = this->getParameters(total % 3);
+                Parameters p = this->getParameters(total % 4);
                 int nDays = currentDate.daysTo(lastDate);
                 double r = this->f(nDays, p);
                 this->setValue(index, 5, QVariant(r));
@@ -468,4 +475,29 @@ void MainWindow::on_actionZerar_T_pico_triggered()
     {
         this->setValue(index, c, QVariant(QString("")));
     }
+}
+
+void MainWindow::on_actionAtualizar_de_Reten_o_triggered()
+{
+    this->iterate(ui->treeView->rootIndex(),
+                  this->model,
+                  [&](const QModelIndex& index, int)
+    {
+          QString type = this->getValue(index, 1);
+          if (type == "TOPIC")
+          {
+              QString lastDateStr = this->getValue(index, 3);
+              if (!lastDateStr.isEmpty())
+              {
+                  QDateTime lastDate = QDateTime::fromString(lastDateStr, kDateFormat);
+                  int total = this->getValue(index, 6).toInt();
+                  /* % de Retenção */
+                  Parameters p = this->getParameters(total % 4);
+                  QDateTime currentDate = QDateTime::currentDateTime();
+                  int nDays = currentDate.daysTo(lastDate);
+                  double r = this->f(nDays, p);
+                  this->setValue(index, 5, QVariant(r));
+              }
+          }
+    });
 }

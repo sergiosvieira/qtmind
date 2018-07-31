@@ -47,9 +47,12 @@
    </property>
    <widget class="QMenu" name="menuConcruso">
     <property name="title">
-     <string>Concurso</string>
+     <string>Conteúdo</string>
     </property>
     <addaction name="actionAdicionar_Novo"/>
+    <addaction name="actionNovo_Topico"/>
+    <addaction name="actionNovo_Link"/>
+    <addaction name="actionAtualizar_de_Reten_o"/>
    </widget>
    <widget class="QMenu" name="menuArquivo">
     <property name="title">
@@ -57,9 +60,10 @@
     </property>
     <addaction name="actionCarregar"/>
     <addaction name="actionSalvar"/>
+    <addaction name="actionSalvar_como"/>
    </widget>
-   <addaction name="menuConcruso"/>
    <addaction name="menuArquivo"/>
+   <addaction name="menuConcruso"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -77,12 +81,12 @@
   </widget>
   <action name="actionAdicionar_Novo">
    <property name="text">
-    <string>Novo Concurso</string>
+    <string>Novo Projeto de Estudo</string>
    </property>
   </action>
   <action name="actionNovo_Topico">
    <property name="text">
-    <string>Novo Topico</string>
+    <string>Novo Topico de Estudo</string>
    </property>
   </action>
   <action name="actionRemover_Item">
@@ -94,10 +98,16 @@
    <property name="text">
     <string>Carregar</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionSalvar">
    <property name="text">
     <string>Salvar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionNovo_Link">
@@ -108,6 +118,19 @@
   <action name="actionZerar_T_pico">
    <property name="text">
     <string>Zerar Tópico</string>
+   </property>
+  </action>
+  <action name="actionSalvar_como">
+   <property name="text">
+    <string>Salvar como</string>
+   </property>
+  </action>
+  <action name="actionAtualizar_de_Reten_o">
+   <property name="text">
+    <string>Atualizar % de Retenção</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>
