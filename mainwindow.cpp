@@ -151,6 +151,7 @@ void MainWindow::ctxMenu(const QPoint &pos)
     menu->addAction(tr("Novo Projeto de Estudo"), this, SLOT(on_actionAdicionar_Novo_triggered()));
     menu->addAction(tr("Novo Tópico Principal"), this, SLOT(on_actionNovo_T_pico_Principal_triggered()));
     menu->addAction(tr("Novo Tópico de Estudo"), this, SLOT(on_actionNovo_Topico_triggered()));
+    menu->addAction(tr("Novo Link"), this, SLOT(on_actionNovo_Link_triggered()));
     menu->addSeparator();
     menu->addAction(tr("Mudar para Tópico Principal"), this, SLOT(changeToMainTopic()));
     menu->addAction(tr("Mudar para Tópico"), this, SLOT(changeToTopic()));
@@ -406,6 +407,11 @@ MainWindow::Parameters MainWindow::getParameters(int index)
    return p[index];
 }
 
+double MainWindow::f(double x, const Parameters& p)
+{
+    return p.c1 * exp((-x-p.c2)/p.c3);
+}
+
 void MainWindow::setValue(const QModelIndex &index,
                           int col,
                           QVariant value)
@@ -511,11 +517,6 @@ void MainWindow::on_actionNovo_Link_triggered()
         ui->treeView->selectionModel()->setCurrentIndex(model->index(0, 0, index),
                                                 QItemSelectionModel::ClearAndSelect);
     }
-}
-
-double MainWindow::f(double x, const Parameters& p)
-{
-    return p.c1 * exp((-x-p.c2)/p.c3);
 }
 
 void MainWindow::on_actionZerar_T_pico_triggered()
@@ -717,4 +718,34 @@ void MainWindow::on_actionExibir_t_picos_que_devem_ser_revistos_triggered()
             }
         }
     });
+}
+
+void MainWindow::on_actionPesquisar_topicos_estudados_ontem_triggered()
+{
+    this->iterate(ui->treeView->currentIndex(), model, [&](const QModelIndex& index, int depth)
+    {
+        if (index.isValid())
+        {
+            QString lastDateStr = this->getValue(index, 3);
+            if (!lastDateStr.isEmpty())
+            {
+                QDateTime lastDate = QDateTime::fromString(lastDateStr, kDateFormat);
+                QDateTime currentDate = QDateTime::currentDateTime();
+                int daysTo = currentDate.date().daysTo(lastDate.date());
+                if (daysTo == -1)
+                {
+                    QStandardItem *item = model->itemFromIndex(index);
+                    if (item)
+                    {
+                        item->setBackground(Qt::lightGray);
+                    }
+                }
+            }
+        }
+    });
+}
+
+void MainWindow::on_actionFechar_triggered()
+{
+    model->clear();
 }

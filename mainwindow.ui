@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>746</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConcruso">
@@ -62,11 +62,14 @@
     <addaction name="actionCarregar"/>
     <addaction name="actionSalvar"/>
     <addaction name="actionSalvar_como"/>
+    <addaction name="separator"/>
+    <addaction name="actionFechar"/>
    </widget>
    <widget class="QMenu" name="menuPesquisar">
     <property name="title">
      <string>Pesquisar</string>
     </property>
+    <addaction name="actionPesquisar_topicos_estudados_ontem"/>
     <addaction name="actionExibir_Topicos_Estudados_Hoje"/>
     <addaction name="actionExibir_t_picos_que_devem_ser_revistos"/>
    </widget>
@@ -97,6 +100,9 @@
    <property name="text">
     <string>Novo Topico de Estudo</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
   </action>
   <action name="actionRemover_Item">
    <property name="text">
@@ -123,6 +129,9 @@
    <property name="text">
     <string>Novo Link</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
   </action>
   <action name="actionZerar_T_pico">
    <property name="text">
@@ -146,15 +155,31 @@
    <property name="text">
     <string>Novo Tópico Principal</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
   </action>
   <action name="actionExibir_Topicos_Estudados_Hoje">
    <property name="text">
-    <string>Exibir Topicos Estudados Hoje</string>
+    <string>Exibir topicos estudados hoje</string>
    </property>
   </action>
   <action name="actionExibir_t_picos_que_devem_ser_revistos">
    <property name="text">
     <string>Exibir tópicos que devem ser revistos</string>
+   </property>
+  </action>
+  <action name="actionPesquisar_topicos_estudados_ontem">
+   <property name="text">
+    <string>Exibir tópicos estudados ontem</string>
+   </property>
+  </action>
+  <action name="actionFechar">
+   <property name="text">
+    <string>Fechar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>

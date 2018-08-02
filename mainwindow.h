@@ -92,6 +92,10 @@ private slots:
 
     void on_actionExibir_t_picos_que_devem_ser_revistos_triggered();
 
+    void on_actionPesquisar_topicos_estudados_ontem_triggered();
+
+    void on_actionFechar_triggered();
+
 private:
     Ui::MainWindow *ui;
     QStandardItemModel* model = nullptr;
