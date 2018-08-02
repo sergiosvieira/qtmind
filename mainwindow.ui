@@ -50,6 +50,7 @@
      <string>Conteúdo</string>
     </property>
     <addaction name="actionAdicionar_Novo"/>
+    <addaction name="actionNovo_T_pico_Principal"/>
     <addaction name="actionNovo_Topico"/>
     <addaction name="actionNovo_Link"/>
     <addaction name="actionAtualizar_de_Reten_o"/>
@@ -62,8 +63,16 @@
     <addaction name="actionSalvar"/>
     <addaction name="actionSalvar_como"/>
    </widget>
+   <widget class="QMenu" name="menuPesquisar">
+    <property name="title">
+     <string>Pesquisar</string>
+    </property>
+    <addaction name="actionExibir_Topicos_Estudados_Hoje"/>
+    <addaction name="actionExibir_t_picos_que_devem_ser_revistos"/>
+   </widget>
    <addaction name="menuArquivo"/>
    <addaction name="menuConcruso"/>
+   <addaction name="menuPesquisar"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="mainToolBar">
@@ -131,6 +140,21 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionNovo_T_pico_Principal">
+   <property name="text">
+    <string>Novo Tópico Principal</string>
+   </property>
+  </action>
+  <action name="actionExibir_Topicos_Estudados_Hoje">
+   <property name="text">
+    <string>Exibir Topicos Estudados Hoje</string>
+   </property>
+  </action>
+  <action name="actionExibir_t_picos_que_devem_ser_revistos">
+   <property name="text">
+    <string>Exibir tópicos que devem ser revistos</string>
    </property>
   </action>
  </widget>

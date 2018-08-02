@@ -58,6 +58,18 @@ public:
     ~MainWindow();
 protected:
     void setValue(const QModelIndex &index, int col, QVariant value);
+    void expandChildren(const QModelIndex &index);
+    void retractChildren(const QModelIndex &index);
+    void retract();
+protected slots:
+    void ctxMenu(const QPoint &pos);
+    void changeToMainTopic();
+    void changeToTopic();
+    void changeToLink();
+    void expand();
+    void mark();
+    void unmark();
+    void editText();
 private slots:
     void on_actionAdicionar_Novo_triggered();
     void on_actionNovo_Topico_triggered();
@@ -73,6 +85,12 @@ private slots:
     void on_actionZerar_T_pico_triggered();
 
     void on_actionAtualizar_de_Reten_o_triggered();
+
+    void on_actionNovo_T_pico_Principal_triggered();
+
+    void on_actionExibir_Topicos_Estudados_Hoje_triggered();
+
+    void on_actionExibir_t_picos_que_devem_ser_revistos_triggered();
 
 private:
     Ui::MainWindow *ui;

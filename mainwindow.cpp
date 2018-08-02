@@ -68,8 +68,8 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
     QString name = contest[kName].toString();
     QString lastStr = contest[kLastReinforcement].toString();
     QString nextStr = contest[kNextReinforcement].toString();
-    QString retention = QString("%1").arg(contest[kRetention].toInt());
-    QString reinforcements = QString("%1").arg(contest[kTotalReinforcement].toInt());
+    QString retention = contest[kRetention].toString();
+    QString reinforcements = contest[kTotalReinforcement].toString();
     QString type = contest[kType].toString();
     QString page = contest[kPage].toString();
     QStringList auxList = {
@@ -107,10 +107,61 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->createModel();
-    for (int i = 0; i < 7; ++i)
-    {
-        ui->treeView->header()->setSectionResizeMode(i, QHeaderView::ResizeToContents);
-    }
+//    for (int i = 0; i < 7; ++i)
+//    {
+//        ui->treeView->header()->setSectionResizeMode(i, QHeaderView::ResizeToContents);
+//    }
+    ui->treeView->setSortingEnabled(true);
+    ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    ui->treeView->setDragDropMode(QAbstractItemView::InternalMove);
+    ui->treeView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    ui->treeView->setDragEnabled(true);
+    ui->treeView->setAcceptDrops(true);
+    ui->treeView->setDropIndicatorShown(true);
+
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QStandardItem *item = model->itemFromIndex(index);
+    connect(ui->treeView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(ctxMenu(const QPoint &)));
+}
+
+void MainWindow::changeToMainTopic()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    this->setValue(index, 1, QVariant("MAIN_TOPIC"));
+}
+
+void MainWindow::changeToTopic()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    this->setValue(index, 1, QVariant("TOPIC"));
+}
+
+void MainWindow::changeToLink()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    this->setValue(index, 1, QVariant("LINK"));
+}
+
+
+
+void MainWindow::ctxMenu(const QPoint &pos)
+{
+    QMenu *menu = new QMenu;
+    menu->addAction(tr("Novo Projeto de Estudo"), this, SLOT(on_actionAdicionar_Novo_triggered()));
+    menu->addAction(tr("Novo Tópico Principal"), this, SLOT(on_actionNovo_T_pico_Principal_triggered()));
+    menu->addAction(tr("Novo Tópico de Estudo"), this, SLOT(on_actionNovo_Topico_triggered()));
+    menu->addSeparator();
+    menu->addAction(tr("Mudar para Tópico Principal"), this, SLOT(changeToMainTopic()));
+    menu->addAction(tr("Mudar para Tópico"), this, SLOT(changeToTopic()));
+    menu->addAction(tr("Mudar para Link"), this, SLOT(changeToLink()));
+    menu->addAction(tr("Editar texto"), this, SLOT(editText()));
+    menu->addSeparator();
+    menu->addAction(tr("Expandir todos"), this, SLOT(expand()));
+    menu->addAction(tr("Retrair todos"), this, SLOT(retract()));
+    menu->addAction(tr("Marcar"), this, SLOT(mark()));
+    menu->addAction(tr("Desmarcar"), this, SLOT(unmark()));
+    menu->exec(ui->treeView->mapToGlobal(pos));
 }
 
 MainWindow::~MainWindow()
@@ -122,7 +173,7 @@ void MainWindow::on_actionAdicionar_Novo_triggered()
 {
     static int id = 1;
     bool ok = false;
-    QString title = tr("Nome do Concurso:");
+    QString title = tr("Nome do Projeto de Estudo:");
     QString text = QInputDialog::getText(
         this,
         tr("Reforço Mental"),
@@ -216,7 +267,7 @@ void MainWindow::on_actionCarregar_triggered()
             QJsonObject contest = contestsArray[index].toObject();
             this->insertRow(contest, ui->treeView->selectionModel()->currentIndex());
         }
-        ui->treeView->expandAll();
+        //ui->treeView->expandAll();
     }
 
 }
@@ -494,10 +545,176 @@ void MainWindow::on_actionAtualizar_de_Reten_o_triggered()
                   /* % de Retenção */
                   Parameters p = this->getParameters(total % 4);
                   QDateTime currentDate = QDateTime::currentDateTime();
-                  int nDays = currentDate.daysTo(lastDate);
-                  double r = this->f(nDays, p);
-                  this->setValue(index, 5, QVariant(r));
+                  int nDays = lastDate.daysTo(currentDate);
+                  if (nDays > 0)
+                  {
+                      double r = this->f(nDays, p);
+                      this->setValue(index, 5, QVariant(r));
+                  }
               }
           }
+    });
+}
+
+void MainWindow::on_actionNovo_T_pico_Principal_triggered()
+{
+    static int id = 1;
+    bool ok = false;
+    QString title = tr("Nome do Tópico Principal:");
+    QString text = QInputDialog::getText(
+        this,
+        tr("Reforço Mental"),
+        title,
+        QLineEdit::Normal,
+        QString("Tópico Principal %1").arg(id++),
+        &ok
+    );
+    if (ok && !text.isEmpty())
+    {
+        QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+        QJsonObject object;
+        object[kName] = text;
+        object[kType] = "MAIN_TOPIC";
+        this->insertChild(object, index);
+        ui->treeView->selectionModel()->setCurrentIndex(model->index(0, 0, index),
+                                                QItemSelectionModel::ClearAndSelect);
+    }
+}
+
+void MainWindow::mark()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QStandardItem *item = model->itemFromIndex(index);
+    item->setBackground(Qt::yellow);
+}
+
+void MainWindow::unmark()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QStandardItem *item = model->itemFromIndex(index);
+    item->setBackground(Qt::NoBrush);
+}
+
+void MainWindow::editText()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QString oldText = index.data().toString();
+    bool ok = false;
+    QString title = tr("Editar texto:");
+    QString text = QInputDialog::getText(
+        this,
+        tr("Reforço Mental"),
+        title,
+        QLineEdit::Normal,
+        oldText,
+        &ok
+    );
+    if (ok && !text.isEmpty())
+    {
+        this->setValue(index, 0, QVariant(text));
+    }
+}
+
+void MainWindow::expand()
+{
+    expandChildren(ui->treeView->selectionModel()->currentIndex());
+}
+
+void MainWindow::retract()
+{
+    retractChildren(ui->treeView->selectionModel()->currentIndex());
+}
+
+void MainWindow::retractChildren(const QModelIndex &index)
+{
+    QTreeView& view = *ui->treeView;
+    if (!index.isValid())
+    {
+        return;
+    }
+
+    int childCount = index.model()->rowCount(index);
+    for (int i = 0; i < childCount; i++)
+    {
+        const QModelIndex &child = index.child(i, 0);
+        retractChildren(child);
+    }
+    if (view.isExpanded(index))
+    {
+        view.collapse(index);
+    }
+
+}
+
+void MainWindow::expandChildren(const QModelIndex& index)
+{
+    QTreeView& view = *ui->treeView;
+    if (!index.isValid())
+    {
+        return;
+    }
+
+    int childCount = index.model()->rowCount(index);
+    for (int i = 0; i < childCount; i++) {
+        const QModelIndex &child = index.child(i, 0);
+        // Recursively call the function for each child node.
+        expandChildren(child);
+    }
+    if (!view.isExpanded(index))
+    {
+        view.expand(index);
+    }
+}
+
+void MainWindow::on_actionExibir_Topicos_Estudados_Hoje_triggered()
+{
+    this->iterate(ui->treeView->currentIndex(), model, [&](const QModelIndex& index, int depth)
+    {
+        if (index.isValid())
+        {
+            QString lastDateStr = this->getValue(index, 3);
+            if (!lastDateStr.isEmpty())
+            {
+                QDateTime lastDate = QDateTime::fromString(lastDateStr, kDateFormat);
+                QDateTime currentDate = QDateTime::currentDateTime();
+                if (lastDate.date() == currentDate.date())
+                {
+                    QStandardItem *item = model->itemFromIndex(index);
+                    if (item)
+                    {
+                        item->setBackground(Qt::lightGray);
+                        ui->treeView->expand(index);
+                    }
+                }
+            }
+        }
+    });
+}
+
+void MainWindow::on_actionExibir_t_picos_que_devem_ser_revistos_triggered()
+{
+    this->iterate(ui->treeView->currentIndex(), model, [&](const QModelIndex& index, int depth)
+    {
+        if (index.isValid())
+        {
+            QString nextDateStr = this->getValue(index, 4);
+            if (!nextDateStr.isEmpty())
+            {
+                QDateTime nextDate = QDateTime::fromString(nextDateStr, kDateFormat);
+                QDateTime currentDate = QDateTime::currentDateTime();
+                if (currentDate.date() >= nextDate.date())
+                {
+                    QStandardItem *item = model->itemFromIndex(index);
+                    if (item)
+                    {
+                        QBrush brush;
+                        QColor color(255, 220, 220);
+                        brush.setColor(color);
+                        item->setBackground(brush);
+                        ui->treeView->expand(index);
+                    }
+                }
+            }
+        }
     });
 }
