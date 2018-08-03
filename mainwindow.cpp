@@ -22,6 +22,7 @@ const char* MainWindow::kTotalReinforcement = "total_reinforcements";
 const char* MainWindow::kType = "type";
 const char* MainWindow::kPage = "page";
 const char* MainWindow::kDateFormat = "yyyy-MM-dd hh:mm:ss";
+const char* MainWindow::kDescription = "description";
 const std::vector<MainWindow::Parameters> kParameters;
 
 void MainWindow::insertRow(QJsonObject& object, const QModelIndex &mIndex)
@@ -45,7 +46,7 @@ void MainWindow::insertChild(QJsonObject& object, const QModelIndex &index)
 {
     if (model->columnCount(index) == 0)
     {
-        model->insertColumns(0, 7, index);
+        model->insertColumns(0, 8, index);
     }
     if (!model->insertRow(0, index)) return;
     QStringList values;
@@ -72,6 +73,7 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
     QString reinforcements = contest[kTotalReinforcement].toString();
     QString type = contest[kType].toString();
     QString page = contest[kPage].toString();
+    QString description = contest[kDescription].toString();
     QStringList auxList = {
         name,
         type,
@@ -79,7 +81,8 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
         lastStr,
         nextStr,
         retention,
-        reinforcements
+        reinforcements,
+        description
     };
     list.swap(auxList);
     QJsonArray result = contest[kItems].toArray();
@@ -89,9 +92,10 @@ QJsonArray MainWindow::extractValues(QJsonObject &contest, QStringList &list)
 void MainWindow::createModel()
 {
     if (model != nullptr) delete model;
-    model = new QStandardItemModel(0, 7, this);
+    model = new QStandardItemModel(0, 8, this);
     QStringList list = this->getColumnNames();
     model->setHorizontalHeaderLabels(list);
+    ui->treeView->setColumnHidden(7, true);
     ui->treeView->setModel(model);
 }
 
@@ -162,6 +166,8 @@ void MainWindow::ctxMenu(const QPoint &pos)
     menu->addAction(tr("Retrair todos"), this, SLOT(retract()));
     menu->addAction(tr("Marcar"), this, SLOT(mark()));
     menu->addAction(tr("Desmarcar"), this, SLOT(unmark()));
+    menu->addSeparator();
+    menu->addAction(tr("Buscar no Google"), this, SLOT(searchOnWeb()));
     menu->exec(ui->treeView->mapToGlobal(pos));
 }
 
@@ -375,6 +381,7 @@ QStringList MainWindow::getColumnNames()
         tr("Data da próxima revisão"),
         tr("% de Retenção"),
         tr("Número de Revisões"),
+        tr("Descrição")
     };
     return list;
 }
@@ -389,6 +396,7 @@ QStringList& MainWindow::getJsonKeys()
         kNextReinforcement,
         kRetention,
         kTotalReinforcement,
+        kDescription,
         kItems
     };
     return list;
@@ -596,6 +604,14 @@ void MainWindow::unmark()
     item->setBackground(Qt::NoBrush);
 }
 
+void MainWindow::searchOnWeb()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    QString text = this->getValue(index, 0).replace(" ", "+");
+    QString url = QString("https://www.google.com/search?q=%1").arg(text);
+    QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
+}
+
 void MainWindow::editText()
 {
     QModelIndex index = ui->treeView->selectionModel()->currentIndex();
@@ -621,7 +637,7 @@ void MainWindow::expand()
     expandChildren(ui->treeView->selectionModel()->currentIndex());
 }
 
-void MainWindow::retract()
+void MainWindow::   retract()
 {
     retractChildren(ui->treeView->selectionModel()->currentIndex());
 }
@@ -748,4 +764,16 @@ void MainWindow::on_actionPesquisar_topicos_estudados_ontem_triggered()
 void MainWindow::on_actionFechar_triggered()
 {
     model->clear();
+}
+
+void MainWindow::on_textEdit_textChanged()
+{
+    QModelIndex index = ui->treeView->currentIndex();
+    this->setValue(index, 7, QVariant(ui->textEdit->document()->toHtml()));
+}
+
+void MainWindow::on_treeView_clicked(const QModelIndex &index)
+{
+    QString text = this->getValue(index, 7);
+    ui->textEdit->document()->setHtml(text);
 }

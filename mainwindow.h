@@ -35,6 +35,7 @@ private:
     static const char* kType;
     static const char* kPage;
     static const char* kDateFormat;
+    static const char* kDescription;
     QString currentFile = "";
     bool fileUpdated = false;
     void insertRow(QJsonObject& object, const QModelIndex& modelIndex);
@@ -70,6 +71,7 @@ protected slots:
     void mark();
     void unmark();
     void editText();
+    void searchOnWeb();
 private slots:
     void on_actionAdicionar_Novo_triggered();
     void on_actionNovo_Topico_triggered();
@@ -95,6 +97,10 @@ private slots:
     void on_actionPesquisar_topicos_estudados_ontem_triggered();
 
     void on_actionFechar_triggered();
+
+    void on_textEdit_textChanged();
+
+    void on_treeView_clicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
