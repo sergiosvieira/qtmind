@@ -4,11 +4,11 @@
 #include <QMainWindow>
 #include <QAbstractItemModel>
 #include <vector>
+#include <QJsonObject>
 
 class QStandardItemModel;
 class QStandardItem;
 class QJsonArray;
-class QJsonObject;
 class QPdfDocument;
 class QJsonDocument;
 
@@ -36,6 +36,7 @@ private:
     static const char* kPage;
     static const char* kDateFormat;
     static const char* kDescription;
+    QJsonObject transferObject;
     QString currentFile = "";
     bool fileUpdated = false;
     void insertRow(QJsonObject& object, const QModelIndex& modelIndex);
@@ -72,6 +73,8 @@ protected slots:
     void unmark();
     void editText();
     void searchOnWeb();
+    void copy();
+    void paste();
 private slots:
     void on_actionAdicionar_Novo_triggered();
     void on_actionNovo_Topico_triggered();

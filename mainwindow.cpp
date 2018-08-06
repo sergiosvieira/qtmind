@@ -111,10 +111,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->createModel();
-//    for (int i = 0; i < 7; ++i)
-//    {
-//        ui->treeView->header()->setSectionResizeMode(i, QHeaderView::ResizeToContents);
-//    }
     ui->treeView->setSortingEnabled(true);
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -166,6 +162,9 @@ void MainWindow::ctxMenu(const QPoint &pos)
     menu->addAction(tr("Retrair todos"), this, SLOT(retract()));
     menu->addAction(tr("Marcar"), this, SLOT(mark()));
     menu->addAction(tr("Desmarcar"), this, SLOT(unmark()));
+    menu->addSeparator();
+    menu->addAction(tr("Copiar"), this, SLOT(copy()));
+    menu->addAction(tr("Colar"), this, SLOT(paste()));
     menu->addSeparator();
     menu->addAction(tr("Buscar no Google"), this, SLOT(searchOnWeb()));
     menu->exec(ui->treeView->mapToGlobal(pos));
@@ -473,13 +472,16 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
             QDateTime lastDate = QDateTime::fromString(lastDateStr, kDateFormat);
             QDateTime nextDate = QDateTime::fromString(this->getValue(index, 4), kDateFormat);
             QDateTime currentDate = QDateTime::currentDateTime();
-            if (currentDate < nextDate)
+            QMessageBox::StandardButton reply = QMessageBox::Yes;
+            if (currentDate.date() < nextDate.date())
             {
-                QMessageBox msg;
-                msg.setText(tr("Ainda não é hora de revisar."));
-                msg.exec();
+                reply = QMessageBox::question(
+                    this,
+                    "Reforço Mental",
+                    "Ainda não é hora de revisar. Tem certeza que quer registrar uma nova revisão?",
+                    QMessageBox::Yes|QMessageBox::No);
             }
-            else
+            if (reply == QMessageBox::Yes)
             {
                 /* Data da última revisão */
                 QString currentDateStr = currentDate.toString(kDateFormat);
@@ -612,6 +614,20 @@ void MainWindow::searchOnWeb()
     QDesktopServices::openUrl(QUrl(url, QUrl::TolerantMode));
 }
 
+void MainWindow::copy()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    this->transferObject = this->forEach(index, *this->model);
+    this->transferObject[kName] = index.data().toString();
+    this->insertChild(this->transferObject, index);
+}
+
+void MainWindow::paste()
+{
+    QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+    this->insertChild(this->transferObject, index);
+}
+
 void MainWindow::editText()
 {
     QModelIndex index = ui->treeView->selectionModel()->currentIndex();
@@ -724,10 +740,7 @@ void MainWindow::on_actionExibir_t_picos_que_devem_ser_revistos_triggered()
                     QStandardItem *item = model->itemFromIndex(index);
                     if (item)
                     {
-                        QBrush brush;
-                        QColor color(255, 220, 220);
-                        brush.setColor(color);
-                        item->setBackground(brush);
+                        item->setBackground(Qt::lightGray);
                         ui->treeView->expand(index);
                     }
                 }
